@@ -1,54 +1,72 @@
-class Dict1:
+class Human:
 
-    def __init__(self, string_):
+    def __init__(self, name, surname, age, height, weight, gender):
+        self.n = name
+        self.s = surname
+        self.a = age
+        self.h = height
+        self.w = weight
+        self.g = gender
 
-        new_dict = dict()
-        for i in string_:
-            new_dict[i] = string_.count(i)
+    def hundred_years(self):
 
-        self.dict = new_dict
+        age_100 = 100 - self.a + 2022
 
-    def remove_dup_val(self):
+        return age_100
 
-        list_of_val = []
-        dict_without_dup = dict()
+    def optimal_weight(self):
 
-        for i, j in self.dict.items():
-            if j not in list_of_val:
-                dict_without_dup[i] = j
-                list_of_val.append(j)
+        if self.g == "male":
+            opt_w = int(50 + (0.91 * self.h - 152.4))
+        else:
+            opt_w = int(45.5 + (0.91 * self.h - 152.4))
 
-        return dict_without_dup
+        return opt_w
 
-    def high_vals_in_dict(self):
-
-        list_vals = []
-        for i in self.dict.values():
-            if i not in list_vals:
-                list_vals.append(i)
-
-        list_vals.sort()
-        return list_vals[-1], list_vals[-2], list_vals[-3]
+    def present(self):
+        print(f"The person is {self.g}. The full name is {self.n} {self.s}, age is {self.a},"\
+              f"the height and the weight are {self.h}cm and {self.w} kg")
 
 
-string = Dict1("aaaabcrrrdabcfcr")
-print(string.remove_dup_val())
-print(string.high_vals_in_dict())
+class Student(Human):
+    def __init__(self, name, surname, age, weight, height, marks: list, gender, uni):
+        Human.__init__(self, name, surname, age, weight, height, gender)
+        self.marks = marks
+        self.g = gender
+        self.uni = uni
+
+    def add_marks(self):
+        self.marks.append(int(input("Add new mark: ")))
+
+        print(self.marks)
+
+    def average_mark(self):
+
+        m = 0
+
+        for i in self.marks:
+            m += i
+
+        av_mark = m / len(self.marks)
+
+        return av_mark
+
+    def student_description(self):
+        if self.g.lower() == "male":
+            print(f"{self.n} {self.s} is a {self.a} years old student from {self.uni}. His height is "
+                  f"{self.h} with a weight {self.w}. His marks are {self.marks}")
+        else:
+            print(f"{self.n} {self.s} is a {self.a} years old student from {self.uni}. Her height is "
+                  f"{self.h} with a weight {self.w}. Her marks are {self.marks}")
 
 
-# 2
-class Circle:
+student = Human("David", "Grigoryan", 19, 184, 67, "male")
+print(f"You'll turn 100 in {student.hundred_years()}")
+print(f"Your optimal weight is {student.optimal_weight()}")
+student.present()
 
-    def __init__(self, radius):
-        self.r = radius
-
-    def perimeter_of_circle(self):
-        return 2 * 3.14 * self.r
-
-    def area_of_circle(self):
-        return 3.14 * self.r ** 2
-
-
-circle_rad = Circle(10)
-print(circle_rad.perimeter_of_circle())
-print(circle_rad.area_of_circle())
+marks = [20, 20, 19, 18, 20]
+student = Student("David", "Grigoryan", 19, 184, 67, marks, "male", "YSU")
+student.add_marks()
+print(f"The average mark is {student.average_mark()}")
+student.student_description()
