@@ -35,8 +35,9 @@ class Student(Human):
         self.g = gender
         self.uni = uni
 
-    def add_marks(self):
-        self.marks.append(int(input("Add new mark: ")))
+    def add_marks(self, new_mark):
+        self.nm = new_mark
+        self.marks.append(self.nm)
 
         print(self.marks)
 
@@ -67,6 +68,6 @@ student.present()
 
 marks = [20, 20, 19, 18, 20]
 student = Student("David", "Grigoryan", 19, 184, 67, marks, "male", "YSU")
-student.add_marks()
+student.add_marks(int(input("Add new mark: ")))
 print(f"The average mark is {student.average_mark()}")
 student.student_description()
