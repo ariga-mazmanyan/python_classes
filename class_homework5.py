@@ -37,6 +37,7 @@ def special_word():
 
     return list_1
 
+
 print(special_word())
 
 # 4
@@ -51,6 +52,6 @@ for i in txt:
     if not i.isdigit():
         new_file_txt += i
 
-new_file = os.path.join(os.getcwd(), "2nd_file.txt")
+new_file = "2nd_file.txt"
 with open(new_file, "a") as new_file:
     new_file.write(new_file_txt)
